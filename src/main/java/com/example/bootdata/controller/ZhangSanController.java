@@ -13,6 +13,7 @@ public class ZhangSanController {
     public static void main(String[] args) {
 
         System.out.println("项目经理万岁");
+        System.out.println("开发者万岁");
 
     }
 
