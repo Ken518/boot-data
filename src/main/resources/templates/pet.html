@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>宠物管理</title>
+</head>
+<body>
+
+  <table id="app" border="1" width="600px" align="center">
+      <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th>健康值</th>
+          <th>亲密度</th>
+          <th>生日</th>
+      </tr>
+      <tr v-for="(pet, index) in pets">
+          <td>{{index}}</td>
+          <td>{{pet.name}}</td>
+          <td>{{pet.health}}</td>
+          <td>{{pet.love}}</td>
+          <td>{{pet.birthday}}</td>
+      </tr>
+  </table>
+
+
+  <script th:src="@{/webjars/jquery/3.6.0/jquery.js}" src="/webjars/jquery/3.6.0/jquery.js"></script>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+      var app = new Vue({
+          el: '#app',
+          data: {
+              pets: []
+          },
+          mounted:function(){
+
+              $.ajax({
+                  url:"http://localhost:8080/pets",
+                  method:'GET',
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res.data)
+                      app.$data.pets=res.data;
+                  }
+              })
+          }
+      })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.bootdata.dao.PetMapper">
+
+    <resultMap id="pet_rm" type="com.example.bootdata.entity.Pet">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="health" column="health"></result>
+        <result property="love" column="love"></result>
+        <result property="birthday" column="birthday"></result>
+    </resultMap>
+
+    <select id="getAllPet" resultType="pet">
+        select * from t_pet
+        <where>
+          <if test='name!=null and name!=""'>
+              name like '%${name}%'
+          </if>
+        </where>
+    </select>
+
+    <insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into t_pet(name,health,love,birthday)
+        value(#{name},#{health},#{love},#{birthday})
+    </insert>
+
+
+
+</mapper>
